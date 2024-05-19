@@ -1,0 +1,40 @@
+﻿@model List<Application.ViewModels.GeneroViewModel>;
+@{
+    ViewData["Title"] = "Administrar generos";
+}
+
+<div class="container-fluid mb-4">
+    <div class="row">
+        <div class="col-3 offset-9">
+            <a asp-controller="Genero" asp-action="Create" class="btn btn-outline-light bg-primary bg-gradient">Registrar nuevo genero</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <table class="table table-white text-white table-striped-columns">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Application.ViewModels.GeneroViewModel generos in ViewBag.Generos)
+                {
+                    <tr>
+                        <td>@generos.GeneroId</td>
+                        <td>@generos.GeneroName</td>
+                        <td>
+                            <a class="btn btn-sm btn-warning m-md-1 fw-bolder" asp-controller="Genero" asp-action="Edit" asp-route-id="@generos.GeneroId">Editar</a>
+                            <a class="btn btn-sm btn-danger m-md-1 fw-bolder" asp-controller="Genero" asp-action="Delete" asp-route-id="@generos.GeneroId">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

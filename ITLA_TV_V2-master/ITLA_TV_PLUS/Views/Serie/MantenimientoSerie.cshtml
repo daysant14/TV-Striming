@@ -1,0 +1,102 @@
+﻿@model Application.ViewModels.SaveSerieViewModel;
+@{
+    bool edit = Model.SerieId == 0 ? false : true;
+    ViewData["Title"] = "Registrar nueva serie";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-gradient text-black-50">
+                    <h3>@(edit ? $"Editando la serie: {Model.SerieName}." : "Registrando una nueva serie.")</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Serie" asp-action="@(edit ? "Edit" : "Create")">
+                        <div class="mb-3">
+                            <label asp-for="SerieName" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="SerieName" class="form-control" required/>
+                            <span asp-validation-for="SerieName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ImagePath" class="form-label">Link de la imagen: </label>
+                            <input type="text" asp-for="ImagePath" class="form-control" required/>
+                            <span asp-validation-for="ImagePath" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="VideoPath" class="form-label">Link del video: </label>
+                            <input type="text" asp-for="VideoPath" class="form-control" required />
+                            <span asp-validation-for="VideoPath" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Descripcion" class="form-label">Descripcion: </label>
+                            <input type="text" asp-for="Descripcion" class="form-control" required />
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Actores" class="form-label"> Actores: </label>
+                            <input type="text" asp-for="Actores" class="form-control" required />
+                            <span asp-validation-for="Actores" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Año" class="form-label"> Año: </label>
+                            <input type="Año" asp-for="Año" class="form-control" required />
+                            <span asp-validation-for="Año" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Director" class="form-label"> Director: </label>
+                            <input type="text" asp-for="Director" class="form-control" required />
+                            <span asp-validation-for="Director" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="GeneroPrimarioId" class="form-select" id="genero">
+                                <option selected>Selecciona un genero:</option>
+                                @foreach (var genero in ViewBag.GenerosViewModel)
+                                {
+                                    <option value="@genero.GeneroPrimarioId" required>@genero.GeneroPrimarioName</option>
+                                }
+                            </select>
+                            <label for="floatingSelect">Genero primario: </label>
+                            <span asp-validation-for="GeneroPrimarioId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="GeneroSecundarioId" class="form-select" id="genero">
+                                <option selected>Selecciona un genero:</option>
+                                @foreach (var genero in ViewBag.GenerosViewModel)
+                                {
+                                    <option value="@genero.GeneroSecundarioId" required>@genero.GeneroPrimarioName</option>
+                                }
+                            </select>
+                            <label for="floatingSelect">Genero secundario: </label>
+                            <span asp-validation-for="GeneroSecundarioId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select asp-for="ProductoraId" class="form-select" id="productora">
+                                <option selected>Selecciona una productora:</option>
+                                @foreach (var productora in ViewBag.ProductoraViewModel)
+                                {
+                                    <option value="@productora.ProductoraId" required>@productora.ProductoraName</option>
+                                }
+                            </select>
+                            <label for="floatingSelect">Productora: </label>
+                            <span asp-validation-for="ProductoraId" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="SerieId"/>
+
+                        <button type="submit" class="btn btn-dark">Guardar</button>
+                        <a asp-controller="Serie" asp-action="Index" class="btn btn-danger">Regresar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model List<Application.ViewModels.ProductoraViewModel>;
+@{
+    ViewData["Title"] = "Administrar Productora";
+}
+
+<div class="container-fluid mb-4">
+    <div class="row">
+        <div class="col-3 offset-9">
+            <a asp-controller="Productora" asp-action="Create" class="btn btn-outline-light bg-primary bg-gradient">Registrar nueva productora</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <table class="table table-white text-white table-striped-columns">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Application.ViewModels.ProductoraViewModel productora in ViewBag.Productoras)
+                {
+                    <tr>
+                        <td>@productora.ProductoraId</td>
+                        <td>@productora.ProductoraName</td>
+                        <td>
+                            <a class="btn btn-sm btn-warning m-md-1 fw-bolder" asp-controller="Productora" asp-action="Edit" asp-route-id="@productora.ProductoraId">Editar</a>
+                            <a class="btn btn-sm btn-danger m-md-1 fw-bolder" asp-controller="Productora" asp-action="Delete" asp-route-id="@productora.ProductoraId">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

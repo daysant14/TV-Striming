@@ -1,0 +1,105 @@
+﻿@model List<Application.ViewModels.SerieViewModel>
+@{
+    ViewData["Title"] = "Pagina de inicio";
+}
+@using Application;
+@{
+    var filtroSerie = new Application.ViewModels.SerieViewModel();
+}
+
+
+
+<div class="card-header text-center mb-2 row">
+    <h1 class="text-white fw-bold mb-3"></h1>
+</div>
+
+<div class="row">
+    <!--Buscador-->
+    <div class="container mb-3">
+        <form method="get" asp-controller="Home" asp-action="Index">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <input asp-for="@filtroSerie.SerieName" class="form-control" id="FiltroSerie" name="FiltroSerie" placeholder="Buscar serie..." />
+                    <span asp-validation-for="@filtroSerie.SerieName" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input class="btn bg-primary bg-gradient form-control" type="submit" value="Buscar" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--SECCION DE FILTROS-->
+    <!--SERIES-->
+    <!-- <div class="container mb-3">
+        <form method="get" asp-controller="Home" asp-action="Index">
+            <div class="row">
+                <div class="col-3">
+                    <select asp-for="@filtroSerie.SerieId" class="form-select" id="FiltroSerie" name="FiltroSerie">
+                        <option selected value="">Buscar</option>
+    @foreach (var proc in ViewBag.SeriesViewModel)
+    {
+                                <option value="@proc.SerieName">@proc.SerieName</option>
+    }
+                    </select>
+                    <span asp-validation-for="@filtroSerie.SerieId" class="text-danger"></span>
+                </div>
+
+                <div class="col-1">
+                    <input class="btn btn-outline-light bg-primary bg-gradient form-control" type="submit" value="Buscar" />
+                </div>
+            </div>
+        </form>
+    </div>-->
+    <!--Filtro GENERO-->
+               <!-- <div class="col-3">
+                    <select asp-for="@filtroSerie.GeneroPrimarioId" class="form-select" id="FiltroGenero" name="FiltroGenero">
+                        <option selected value="">--Generos--</option>
+                        @foreach (var proc in ViewBag.GenerosViewModel)
+                        {
+                            <option value="@proc.GeneroPrimarioName">@proc.GeneroPrimarioName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@filtroSerie.GeneroPrimarioId" class="text-danger"></span>
+                </div>-->
+
+
+               <!-- <div class="col-3">
+                    <select asp-for="@filtroSerie.ProductoraId" class="form-select" id="FiltroProduc" name="FiltroProduc">
+                        <option selected value="">--Productoras--</option>
+                        @foreach (var proc in ViewBag.ProductoraViewModel)
+                        {
+                            <option value="@proc.ProductoraName">@proc.ProductoraName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="@filtroSerie.ProductoraId" class="text-danger"></span>
+                 </div>-->
+
+         
+
+
+
+
+    <!--SECCION DE SERIES-->
+    @if (Model == null || Model.Count == 0)
+    {
+        <h1 class="text-white">En este momento no tenemos series disponibles.</h1>
+    }
+    else
+    {
+        @foreach (Application.ViewModels.SerieViewModel serie in Model)
+        {
+            <div class="col-4 mb-4">
+                <!-- Aumenta el valor de mb para más margen inferior -->
+                <div class="card" style="border: none;">
+                    <a asp-controller="Home" asp-action="SeriesDetails" asp-route-id="@serie.SerieId">
+                        <img class="bd-placeholder-img card-img-top img-size" src="@serie.ImagePath" style="border: none;" />
+                    </a>
+                </div>
+            </div>
+        }
+    }
+
+
+    <!--SECCION DE SERIES-->
+</div>

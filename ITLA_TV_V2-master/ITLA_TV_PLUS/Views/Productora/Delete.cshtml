@@ -1,0 +1,23 @@
+﻿@model Application.ViewModels.SaveProductoraViewModel
+@{
+    ViewData["Title"] = "Eliminar productoras";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-danger text-light">
+                <h4>¿Está seguro que desea eliminar @Model.ProductoraName del listado?</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Productora" asp-action="DeletePost">
+                    <input type="hidden" asp-for="ProductoraId" name="id" />
+
+                    <button type="submit" class="btn btn-danger fw-bold">Eliminar</button>
+                    <a asp-controller="Productora" asp-action="Index" class="btn btn-warning fw-bold">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
